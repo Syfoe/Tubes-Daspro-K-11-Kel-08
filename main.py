@@ -64,12 +64,16 @@ def F01():
 # F02 fungsi logout
 def F02():
     global login
+    global username
+    global role
     if login:
         login = False
-        print("logout berhasil")
+        username = ''
+        role = ''
+        print('"logout" berhasil')
     else:
-        print("logout gagal")
-        print("Anda belum login, silahkan login terlebih dahulu sebelum melakukan logout")
+        print('"logout" gagal')
+        print('Anda belum "login", silahkan "login" terlebih dahulu sebelum melakukan "logout"')
         
 # F05
 def F05 ():
