@@ -16,13 +16,18 @@ for i in range(panjangData):
     database[i] = split(database[i],';')
 file.close()
 print(database)
+role = ''
+username = ''
 
 
 # F01 fungsi login
 def F01():
     global login
+    global role
+    global username
     if login:
         print("Login gagal!")
+        print(f'And telah login dengan username {username}, silahkan lakukan "logout" sebelum melakukan login kembali.')
     else:
         user = input("usename: ")
         password = input("password: ")
@@ -35,18 +40,26 @@ def F01():
                 user_match = True
             if (password == database[i][1]):
                 password_match = True
+            if (password_match and user_match):
+                indeksPlayer = i
+                break
     
 
         if (user_match):
             if (password_match):
                 print("selamat datang, " + str(user) + '!')
                 print('Masukkan command "help" untuk daftar command yang dapat kamu panggil')
+                login = True
+                role = database[indeksPlayer][2]
+                username = database[indeksPlayer][0]
+                print("role: ", role)
+                print('username', username)
             else:
                 print("Password salah!")
         else:
             print("Username tidak terdaftar!")
 
-        login = True
+        
 
 # F02 fungsi logout
 def F02():
@@ -60,27 +73,32 @@ def F02():
         
 # F05
 def F05 ():
-    username = input("Masukkan username jin: ")
-    a = False
-    for i in range (len_arr(database)):
-        if username == database[i][0]:
-            a = True
-            indeksUser = i
-            break
-            
-    if a == False:
-        print("Tidak ada jin dengan username tersebut.")
+    global role
+    if(role == "bandung_bondowoso"):
+    
+        username_jin = input("Masukkan username jin: ")
+        a = False
+        for i in range (len_arr(database)):
+            if username_jin == database[i][0]:
+                a = True
+                indeksUser = i
+                break
+                
+        if a == False:
+            print("Tidak ada jin dengan username tersebut.")
+        else:
+                if database[indeksUser][2] == "pengumpul":
+                    konfirmasi = input(f"Jin ini bertipe \"{database[indeksUser][2]}\". Yakin ingin mengubah ke tipe \"Pembangun\"(Y/N)?")
+                    if konfirmasi == "Y":
+                        print("Jin telah berhasil diubah.")
+                        database[indeksUser][2] = "pembangun"
+                else:
+                    konfirmasi = input(f"Jin ini bertipe \"{database[indeksUser][2]}\". Yakin ingin mengubah ke tipe \"Pengumpul\"(Y/N)?")
+                    if konfirmasi == "Y":
+                        print("Jin telah berhasil diubah.")
+                        database[indeksUser][2] = "pengumpul"
     else:
-            if database[indeksUser][2] == "pengumpul":
-                konfirmasi = input(f"Jin ini bertipe \"{database[indeksUser][2]}\". Yakin ingin mengubah ke tipe \"Pembangun\"(Y/N)?")
-                if konfirmasi == "Y":
-                    print("Jin telah berhasil diubah.")
-                    database[indeksUser][2] = "pembangun"
-            else:
-                konfirmasi = input(f"Jin ini bertipe \"{database[indeksUser][2]}\". Yakin ingin mengubah ke tipe \"Pengumpul\"(Y/N)?")
-                if konfirmasi == "Y":
-                    print("Jin telah berhasil diubah.")
-                    database[indeksUser][2] = "pengumpul"
+        print("maaf anda bukan bandung bondowoso. Akses ditolak")
 
 while True:
     pilihan = input(">>> ")
