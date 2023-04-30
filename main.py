@@ -57,6 +57,8 @@ def F02():
     else:
         print("logout gagal")
         print("Anda belum login, silahkan login terlebih dahulu sebelum melakukan logout")
+        
+# F05
 
 while True:
     pilihan = input(">>> ")
