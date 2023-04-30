@@ -1,10 +1,16 @@
 from fungsi import *
 # login
+<<<<<<< HEAD
 def log():
+=======
+login = False
+def log_in():
+>>>>>>> 30e6657858515c4634c4fc96d4d96b87e1d495cc
     global login
     if login:
         print("Login gagal!")
     else:
+<<<<<<< HEAD
         user = input("Username: ")
         password = input("Password: ")
         file = open("user.csv", 'r')
@@ -12,6 +18,16 @@ def log():
         panjangData = len_arr(a) - 1
         database = ['' for i in range(panjangData)]
 
+=======
+        user = input()
+        password = input()
+
+        file = open("user.csv", 'r')
+        a = file.readlines()
+        panjangData = len_arr(a) - 1
+        database = ['' for i in range(panjangData)]
+
+>>>>>>> 30e6657858515c4634c4fc96d4d96b87e1d495cc
         for i in range(-1,-len_arr(a)-1,-1):
             if (i != -len_arr(a)):
                 database[i] = a[i]
@@ -20,9 +36,18 @@ def log():
             database[i] = strip(database[i],'\n')
             database[i] = split(database[i],';')
 
+<<<<<<< HEAD
         users = ['' for i in range(panjangData)]
         passwords = ['' for i in range(panjangData)]
 
+=======
+
+        users = ['' for i in range(panjangData)]
+        passwords = ['' for i in range(panjangData)]
+
+        print(database)
+
+>>>>>>> 30e6657858515c4634c4fc96d4d96b87e1d495cc
         for i in range(panjangData):
             for j in range(3):
                 if (j == 0):
@@ -50,4 +75,10 @@ def log():
         else:
             print("Username tidak terdaftar!")
 
+<<<<<<< HEAD
         login = True
+=======
+        login = True
+
+log_in()
+>>>>>>> 30e6657858515c4634c4fc96d4d96b87e1d495cc

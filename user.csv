@@ -1,5 +1,9 @@
 username;password;role
 Bondowoso;cintaroro;bandung_bondowoso
 Roro;gasukabondo;roro_jonggrang
+<<<<<<< HEAD
 panji;panji123;pembangun
 asep;asep123;pengumpul
+=======
+joshua;sukangetik;game_master
+>>>>>>> 30e6657858515c4634c4fc96d4d96b87e1d495cc
