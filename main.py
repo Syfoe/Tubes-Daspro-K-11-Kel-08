@@ -59,7 +59,7 @@ def F02():
         print("Anda belum login, silahkan login terlebih dahulu sebelum melakukan logout")
         
 # F05
-def fungsi5 ():
+def F05 ():
     username = input("Masukkan username jin: ")
     a = False
     for i in range (len_arr(database)):
@@ -88,5 +88,7 @@ while True:
         F01()
     elif (pilihan == 'logout'):
         F02()
-    elif(pilihan == 'exit'):
+    elif (pilihan == 'ubahjin'):
+        F05()
+    elif (pilihan == 'exit'):
         break
