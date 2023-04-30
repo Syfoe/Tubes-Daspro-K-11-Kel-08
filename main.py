@@ -59,6 +59,28 @@ def F02():
         print("Anda belum login, silahkan login terlebih dahulu sebelum melakukan logout")
         
 # F05
+def fungsi5 ():
+    username = input("Masukkan username jin: ")
+    a = False
+    for i in range (len_arr(database)):
+        if username == database[i][0]:
+            a = True
+            indeksUser = i
+            break
+            
+    if a == False:
+        print("Tidak ada jin dengan username tersebut.")
+    else:
+            if database[indeksUser][2] == "pengumpul":
+                konfirmasi = input(f"Jin ini bertipe \"{database[indeksUser][2]}\". Yakin ingin mengubah ke tipe \"Pembangun\"(Y/N)?")
+                if konfirmasi == "Y":
+                    print("Jin telah berhasil diubah.")
+                    database[indeksUser][2] = "pembangun"
+            else:
+                konfirmasi = input(f"Jin ini bertipe \"{database[indeksUser][2]}\". Yakin ingin mengubah ke tipe \"Pengumpul\"(Y/N)?")
+                if konfirmasi == "Y":
+                    print("Jin telah berhasil diubah.")
+                    database[indeksUser][2] = "pengumpul"
 
 while True:
     pilihan = input(">>> ")
