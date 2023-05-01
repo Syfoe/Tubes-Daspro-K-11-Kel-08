@@ -144,9 +144,9 @@ Jenis jin yang dapat dipanggil:
                     pass_found = True
             
             print("""
-        Mengumpulkan sesajen...
-        Menyerahkan sesajen...
-        Membacakan mantra...
+Mengumpulkan sesajen...
+Menyerahkan sesajen...
+Membacakan mantra...
             """)
             print(f'Jin {nama_jin} berhasil dipanggil!')
             jinbaru = ['','','']
@@ -157,9 +157,9 @@ Jenis jin yang dapat dipanggil:
                     jinbaru[i] = pass_jin
                 else:
                     if(jenis_jin == 1):
-                        jinbaru[i] = "pengumpul"
+                        jinbaru[i] = "jin_pengumpul"
                     else:
-                        jinbaru[i] = "pembangun"
+                        jinbaru[i] = "jin_pembangun"
             database = konso(database,jinbaru)
             update("user.csv",database)
         else:
@@ -167,8 +167,34 @@ Jenis jin yang dapat dipanggil:
     else:
         print("anda bukan bondowoso. Akses ditolak")    
 
+# F04
+def F04():
+    global database
+    global role
+    if (role == 'bandung_bondowoso'):
+        nama_jin = input("Masukkan username jin: ")
+        name_found = False
+        data_jin = ""
+        for i in range (len_arr(database)):
+            if (database[i][0] == nama_jin):
+                name_found = True
+                data_jin = database[i]
 
-        
+        if (name_found):
+            choice = input(f"Apakah anda yakin ingin menghapus jin dengan username {nama_jin} (Y/N)? ")
+            if (choice == 'Y' or choice == "y"):
+                database = delete_elemen(database,data_jin)
+                update('user.csv', database)
+                print("Jin berhasil dihapus dari alam gaib")
+            elif (choice == 'N' or choice == 'n'):
+                print("Jin tidak berhasil dihapus dari alam gaib")
+            else:
+                print("input salah")
+        else:
+            print("Tidak ada jin dengan username tersebut.")
+    else:
+        print('Anda bukan Bandung Bondowoso. Akses ditolak')
+
 # F05
 def F05 ():
     global role
@@ -188,17 +214,18 @@ def F05 ():
             if a == False:
                 print("Tidak ada jin dengan username tersebut.")
             else:
-                    if database[indeksUser][2] == "pengumpul":
+                    if database[indeksUser][2] == "jin_pengumpul":
                         konfirmasi = input(f"Jin ini bertipe \"{database[indeksUser][2]}\". Yakin ingin mengubah ke tipe \"Pembangun\"(Y/N)?")
-                        if konfirmasi == "Y":
+                        if (konfirmasi == "Y" or konfirmasi == "y"):
                             print("Jin telah berhasil diubah.")
-                            database[indeksUser][2] = "pembangun"
+                            database[indeksUser][2] = "jin_pembangun"
                             print(database)
+                            update('user.csv', database)
                     else:
                         konfirmasi = input(f"Jin ini bertipe \"{database[indeksUser][2]}\". Yakin ingin mengubah ke tipe \"Pengumpul\"(Y/N)?")
-                        if konfirmasi == "Y":
+                        if (konfirmasi == "Y" or konfirmasi == 'y'):
                             print("Jin telah berhasil diubah.")
-                            database[indeksUser][2] = "pengumpul"
+                            database[indeksUser][2] = "jin_pengumpul"
                             print(database)
                             update("user.csv", database)
         else:
@@ -277,7 +304,7 @@ Untuk keluar dari program dan kembali ke terminal
 5. exit
    Untuk keluar dari program        
         """)
-    elif(role == 'pembangun'):
+    elif(role == 'jin_pembangun'):
         print("""
 =========== HELP ===========
 1. logout
@@ -289,7 +316,7 @@ Untuk menyimpan data permainan
 4. exit
 Untuk keluar dari program
         """)
-    elif(role == 'pengumpul'):
+    elif(role == 'jin_pengumpul'):
         print("""
 =========== HELP ===========
 1. logout
@@ -320,6 +347,8 @@ while True:
         F02()
     elif (pilihan == 'summonjin'):
         F03()
+    elif(pilihan == 'hapusjin'):
+        F04()
     elif (pilihan == 'ubahjin'):
         F05()
     elif(pilihan == 'ayamberkokok'):
