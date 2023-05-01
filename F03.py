@@ -1,4 +1,4 @@
-mport pandas as pd
+import pandas as pd
 
 def summonjin():
     df_datajin = pd.read_csv("user.csv",sep='[;]',engine='python')
