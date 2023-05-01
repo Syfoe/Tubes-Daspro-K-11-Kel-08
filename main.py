@@ -74,7 +74,6 @@ for i in range(panjangData):
     database[i] = strip(database[i],'\n')
     database[i] = split(database[i],';')
 file.close()
-print(database)
 
 # matriks untuk dadta bahan bangunan
 file = open('bahan_bangunan.csv', 'r')
@@ -87,7 +86,6 @@ for i in range (len_arr(data_bahan)):
     data_bahan[i] = strip(data_bahan[i],'\n')
     data_bahan[i] = split(data_bahan[i],';')
 file.close()
-print(data_bahan)
 
 
 #matriks data candi
@@ -141,8 +139,6 @@ def F01():
                 login = True
                 role = database[indeksPlayer][2]
                 username = database[indeksPlayer][0]
-                print("role: ", role)
-                print('username', username)
             else:
                 print("Password salah!")
         else:
@@ -233,7 +229,7 @@ Membacakan mantra...
             else:
                 print("penuh")
         else:
-            print("anda bukan bondowoso. Akses ditolak")
+            print("Anda bukan Bandung Bondowoso. Akses ditolak")
     else:
         print('Anda belum login. Harap login terlebih dahulu!')
         F15()    
@@ -305,7 +301,7 @@ def F05 ():
                             print(database)
                             update("user.csv", database)
         else:
-            print("maaf anda bukan bandung bondowoso. Akses ditolak")
+            print("Anda bukan Bandung Bondowoso. Akses ditolak")
     else:
         print('Anda belum login. Harap login terlebih dahulu!')
         F15()
@@ -405,7 +401,7 @@ def F10():
             print(f'ID Candi Termurah: {id_termurah} (Rp {harga_termurah})')
                     
         else:
-            print("anda bukan bondowoso. Akses ditolak")
+            print("Anda bukan Bandung Bondowoso. Akses ditolak")
     else:
         print('Anda belum login. Harap login terlebih dahulu!')
 
