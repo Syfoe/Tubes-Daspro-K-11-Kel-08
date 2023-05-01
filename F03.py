@@ -1,10 +1,8 @@
-# Deskripsi : Program untuk Summon Jin
+mport pandas as pd
 
-#%%
-def summon () :
-    import pandas as pd
+def summonjin():
     df_datajin = pd.read_csv("user.csv",sep='[;]',engine='python')
-    hitung_jin = len(df_datajin.axes[0])-2
+    hitung_jin = df_datajin.shape[0]-2
     if (hitung_jin) < 100:
         print("Jenis jin yang dapat dipanggil:")
         print("(1) Pengumpul - Bertugas mengumpulkan bahan bangunan")
@@ -16,10 +14,12 @@ def summon () :
             if jenisjin==1 :
                 print("Memilih jin 'Pengumpul'")
                 cekjenisjin=True
+                role = "jin_pengumpul"
             else:
                 if jenisjin==2 :
                     print("Memilih jin 'Pembangun'")
                     cekjenisjin=True
+                    role = "jin_pembangun"
                 else:
                     print(f"Tidak ada jenis jin bernomor {jenisjin} ")
     
@@ -49,4 +49,3 @@ def summon () :
 
     else:
         print("Jumlah Jin telah maksimal! (100 jin). Bandung tidak dapat men-summon lebih dari itu")
-# %%
