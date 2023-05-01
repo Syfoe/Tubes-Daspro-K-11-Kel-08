@@ -368,6 +368,47 @@ def F07():
         print('Anda belum login. Harap login terlebih dahulu!')
         F15()
 
+# F10
+def F10():
+    global data_candi
+    global role
+    global login
+    global candi_built
+    if login:
+        if (role == 'bandung_bondowoso'):
+            print(f"Total candi : {candi_built}")
+            total_pasir = 0
+            total_batu = 0
+            total_air = 0
+            harga_termahal = -1
+            harga_termurah = 200000
+            id_termahal = ''
+            id_termurah = ''
+            for i in range(len_arr(data_candi)):
+                pasir = int(data_candi[i][2])
+                batu = int(data_candi[i][3])
+                air = int(data_candi[i][4])
+                total_air += air
+                total_batu += batu
+                total_pasir += pasir
+                harga = 10000*pasir + 15000*batu + 7500*air
+                if(harga < harga_termurah):
+                    harga_termurah = harga
+                    id_termurah = data_candi[i][0]
+                if(harga > harga_termahal):
+                    harga_termahal = harga
+                    id_termahal = data_candi[i][0]
+            print(f'Total Pasir yang digunakan: {total_pasir}')
+            print(f'Total Batu yang digunakan: {total_batu}')
+            print(f'Total Air yang digunakan: {total_air}')
+            print(f'ID Candi Termahal: {id_termahal} (Rp {harga_termahal})')
+            print(f'ID Candi Termurah: {id_termurah} (Rp {harga_termurah})')
+                    
+        else:
+            print("anda bukan bondowoso. Akses ditolak")
+    else:
+        print('Anda belum login. Harap login terlebih dahulu!')
+
 # F11
 def F11():
     global role
@@ -422,7 +463,7 @@ def F12():
         else:
             print("Anda bukan Roro Jonggrang. Akses ditolak")
     else:
-        print('Andan belum login. Harap login terlebih dahulu!')
+        print('Anda belum login. Harap login terlebih dahulu!')
         F15()
     
 
@@ -526,6 +567,8 @@ while True:
         F06()
     elif(pilihan == 'kumpul'):
         F07()
+    elif(pilihan == 'laporancandi'):
+        F10()
     elif(pilihan == 'hancurkancandi'):
         F11()
     elif(pilihan == 'ayamberkokok'):
@@ -533,4 +576,4 @@ while True:
     elif(pilihan == 'help'):
         F15()
     elif (pilihan == 'exit'):
-        break
+        exit()
