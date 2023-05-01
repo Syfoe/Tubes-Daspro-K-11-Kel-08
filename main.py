@@ -335,7 +335,7 @@ def F06():
                 data_candi_baru = [str(candi_built + 1), username, str(need_pasir), str(need_batu), str(need_air)]
                 data_candi = konso(data_candi,data_candi_baru)
                 update('candi.csv', data_candi)
-                candi_built += 1
+                candi_built = len_arr(data_candi)
                 print(f'sisa candi yang perlu dibangun: {100-candi_built}')
             else:
                 print("Bahan bangunan tidak mencukupi.")
@@ -367,6 +367,41 @@ def F07():
     else:
         print('Anda belum login. Harap login terlebih dahulu!')
         F15()
+
+# F11
+def F11():
+    global role
+    global data_candi
+    global login
+    global candi_built
+    if login:
+        if(role == 'roro_jonggrang'):
+            id_candi = int(input("Masukkan ID candi: "))
+            id_found = False
+            for i in range(len_arr(data_candi)):
+                if(data_candi[i][0] == str(id_candi)):
+                    id_found = True
+                    data_candi_hancur = data_candi[i]
+            if id_found:
+                choice = input(f'Apakah anda yakin ingin menghancurkan candi dengan ID: {id_candi} (Y/N)? ')
+                if (choice == 'y' or choice == 'Y'):
+                    data_candi = delete_elemen(data_candi, data_candi_hancur)
+
+                    candi_built = len_arr(data_candi)
+                    for i in range(len_arr(data_candi)):
+                        data_candi[i][0] = str(i + 1)
+                    update('candi.csv', data_candi)
+                    print("Candi telah berhasil dihancurkan.")
+                else:
+                    print('Gagal menghancurkan candi')
+            else:
+                print(f'Tidak ada candi dengan ID {id_candi}') 
+        else:
+            print("Anda bukan Roro Jonggrang. Akses ditolak")
+    else:
+        print('Anda belum login. Harap login terlebih dahulu!')
+        F15()
+
 
 
 # F12 ayamberkokok
@@ -490,6 +525,8 @@ while True:
         F06()
     elif(pilihan == 'kumpul'):
         F07()
+    elif(pilihan == 'hancurkancandi'):
+        F11()
     elif(pilihan == 'ayamberkokok'):
         F12()
     elif(pilihan == 'help'):
