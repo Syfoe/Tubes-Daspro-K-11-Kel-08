@@ -346,6 +346,28 @@ def F06():
         print('Anda belum login. Harap login terlebih dahulu!')
         F15()
 
+# F07
+def F07():
+    global role
+    global data_bahan
+    global username
+    global login
+    if login:
+        if(role == 'jin_pengumpul'):
+            collect_air = random.randint(0,5)
+            collect_batu = random.randint(0,5)
+            collect_pasir = random.randint(0,5)
+            print(f'Jin {username} menemukan {collect_pasir} pasir, {collect_batu} batu, {collect_air} air')
+            data_bahan[0][2] = str(int(data_bahan[0][2]) + collect_air)
+            data_bahan[1][2] = str(int(data_bahan[1][2]) + collect_batu)
+            data_bahan[2][2] = str(int(data_bahan[2][2]) + collect_pasir)
+            update('bahan_bangunan.csv', data_bahan)
+        else:
+            print("Anda bukan Jin Pengumpul. Akses ditolak")
+    else:
+        print('Anda belum login. Harap login terlebih dahulu!')
+        F15()
+
 
 # F12 ayamberkokok
 def F12(user, batchbangun):
@@ -466,6 +488,8 @@ while True:
         F05()
     elif(pilihan == 'bangun'):
         F06()
+    elif(pilihan == 'kumpul'):
+        F07()
     elif(pilihan == 'ayamberkokok'):
         F12()
     elif(pilihan == 'help'):
