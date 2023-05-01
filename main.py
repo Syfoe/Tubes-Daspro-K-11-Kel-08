@@ -405,25 +405,26 @@ def F11():
 
 
 # F12 ayamberkokok
-def F12(user, batchbangun):
-    if user == "roro_jonggrang": 
-        jumlah_candi = batchbangun
-        print("Kukuruyuk.. Kukuruyuk..")
-        print()
-        if jumlah_candi == 100: 
-            print("Jumlah Candi: " + str(jumlah_candi))
-            print()
-            print("Yah, Bandung Bondowoso memenangkan permainan!")
+def F12():
+    global role
+    global login
+    global candi_built
+    if login:
+        if(role == 'roro_jonggrang'):
+            print('Kukuruyuk.. Kukuruyuk..')
+            print(f'Jumlah Candi = {candi_built}')
+            if(candi_built<100):
+                print('Selamat, Roro Jonggrang memenangkan permainan!')
+                print('')
+                print('*Bandung Bondowoso angry noise*')
+                print('Roro Jonggrang dikutuk menjadi candi.')
+                exit()
         else:
-            print("Jumlah Candi: " + str(jumlah_candi))
-            print()
-            print("Selamat, Roro Jonggrang memenangkan permainan!")
-            print()
-            print("*Bandung Bondowoso angry noise*")
-            print()
-            print("Roro Jonggrang dikutuk menjadi candi.")
+            print("Anda bukan Roro Jonggrang. Akses ditolak")
     else:
-        print("Maaf anda tidak memiliki akses, command ini hanya dapat digunakan oleh Roro Jonggrang")
+        print('Andan belum login. Harap login terlebih dahulu!')
+        F15()
+    
 
 # F15
 def F15():
