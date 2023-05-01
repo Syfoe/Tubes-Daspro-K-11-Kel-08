@@ -20,6 +20,14 @@ def konso(arr,lmnt):
     temp[count] = lmnt
     return temp
 
+def delete_elemen(matriks : list, elemen):
+    matriksBaru = []
+    for i in range (len_arr(matriks)):
+        if(matriks[i] != elemen):
+            matriksBaru = konso(matriksBaru,matriks[i])
+    return matriksBaru
+        
+
 # Pengganti fungsi append untuk string
 def konso_string(string,lmnt):
     count = len(string)

@@ -200,6 +200,7 @@ def F05 ():
                             print("Jin telah berhasil diubah.")
                             database[indeksUser][2] = "pengumpul"
                             print(database)
+                            update("user.csv", database)
         else:
             print("maaf anda bukan bandung bondowoso. Akses ditolak")
     else:
