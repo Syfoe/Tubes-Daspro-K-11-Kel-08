@@ -1,6 +1,22 @@
 from fungsi import *
 login = False
 
+#fungsi update file
+def update(namaFile: str, matriks: list[list[str]]):
+    with open(namaFile, 'w', encoding='utf-8') as file:
+        if (namaFile == "user.csv"):
+            file.write("username;password;role\n")
+            for i in range(len(matriks)):
+                for j in range(3):
+                    if(j == 2 and i != len(matriks)-1):
+                        file.write(matriks[i][j])
+                        file.write("\n")
+                    else:
+                        file.write(matriks[i][j])
+                        file.write(";")
+        else:
+            print("")
+
 # matriks data (username, password, role)
 file = open("user.csv", 'r')
 a = file.readlines()
@@ -29,7 +45,7 @@ def F01():
         print("Login gagal!")
         print(f'And telah login dengan username {username}, silahkan lakukan "logout" sebelum melakukan login kembali.')
     else:
-        user = input("usename: ")
+        user = input("username: ")
         password = input("password: ")
 
         user_match = False
@@ -74,43 +90,179 @@ def F02():
     else:
         print('"logout" gagal')
         print('Anda belum "login", silahkan "login" terlebih dahulu sebelum melakukan "logout"')
+
+# F03
+def F03():
+    print("""
+Jenis jin yang dapat dipanggil:
+ (1) Pengumpul - Bertugas mengumpulkan bahan bangunan
+ (2) Pembangun - Bertugas membangun candi
+    """)
+    jenis_jin = int(input("Masukkan nomor jenis jin yang ingin dipanggil: "))
+    while(jenis_jin != 1 and jenis_jin != 2):
+        print(f'Tidak ada jenis jin bernomor "{jenis_jin}"')
+        jenis_jin = int(input("Masukkan nomor jenis jin yang ingin dipanggil: "))
+    if (jenis_jin == 1):
+        print('Memilih jin "Pengumpul".')
+    elif (jenis_jin == 2):
+        print('Memilih jin "Pembangun".')
+
         
 # F05
 def F05 ():
     global role
-    if(role == "bandung_bondowoso"):
-    
-        username_jin = input("Masukkan username jin: ")
-        a = False
-        for i in range (len_arr(database)):
-            if username_jin == database[i][0]:
-                a = True
-                indeksUser = i
-                break
-                
-        if a == False:
-            print("Tidak ada jin dengan username tersebut.")
+    global database
+    global login
+    if login:
+        if(role == "bandung_bondowoso"):
+        
+            username_jin = input("Masukkan username jin: ")
+            a = False
+            for i in range (len_arr(database)):
+                if username_jin == database[i][0]:
+                    a = True
+                    indeksUser = i
+                    break
+                    
+            if a == False:
+                print("Tidak ada jin dengan username tersebut.")
+            else:
+                    if database[indeksUser][2] == "pengumpul":
+                        konfirmasi = input(f"Jin ini bertipe \"{database[indeksUser][2]}\". Yakin ingin mengubah ke tipe \"Pembangun\"(Y/N)?")
+                        if konfirmasi == "Y":
+                            print("Jin telah berhasil diubah.")
+                            database[indeksUser][2] = "pembangun"
+                            print(database)
+                    else:
+                        konfirmasi = input(f"Jin ini bertipe \"{database[indeksUser][2]}\". Yakin ingin mengubah ke tipe \"Pengumpul\"(Y/N)?")
+                        if konfirmasi == "Y":
+                            print("Jin telah berhasil diubah.")
+                            database[indeksUser][2] = "pengumpul"
+                            print(database)
         else:
-                if database[indeksUser][2] == "pengumpul":
-                    konfirmasi = input(f"Jin ini bertipe \"{database[indeksUser][2]}\". Yakin ingin mengubah ke tipe \"Pembangun\"(Y/N)?")
-                    if konfirmasi == "Y":
-                        print("Jin telah berhasil diubah.")
-                        database[indeksUser][2] = "pembangun"
-                else:
-                    konfirmasi = input(f"Jin ini bertipe \"{database[indeksUser][2]}\". Yakin ingin mengubah ke tipe \"Pengumpul\"(Y/N)?")
-                    if konfirmasi == "Y":
-                        print("Jin telah berhasil diubah.")
-                        database[indeksUser][2] = "pengumpul"
+            print("maaf anda bukan bandung bondowoso. Akses ditolak")
     else:
-        print("maaf anda bukan bandung bondowoso. Akses ditolak")
+        print('Anda belum login. Harap login terlebih dahulu!')
+        F15()
 
+# F12 ayamberkokok
+def F12(user, batchbangun):
+    if user == "roro_jonggrang": 
+        jumlah_candi = batchbangun
+        print("Kukuruyuk.. Kukuruyuk..")
+        print()
+        if jumlah_candi == 100: 
+            print("Jumlah Candi: " + str(jumlah_candi))
+            print()
+            print("Yah, Bandung Bondowoso memenangkan permainan!")
+        else:
+            print("Jumlah Candi: " + str(jumlah_candi))
+            print()
+            print("Selamat, Roro Jonggrang memenangkan permainan!")
+            print()
+            print("*Bandung Bondowoso angry noise*")
+            print()
+            print("Roro Jonggrang dikutuk menjadi candi.")
+    else:
+        print("Maaf anda tidak memiliki akses, command ini hanya dapat digunakan oleh Roro Jonggrang")
+
+# F15
+def F15():
+    global role
+    if (role == ''):
+        print("""
+=========== HELP ===========
+1. login
+Untuk masuk menggunakan akun
+2. exit
+Untuk keluar dari program dan kembali ke terminal
+              """)
+    elif (role == 'bandung_bondowoso'):
+        print("""
+=========== HELP ===========
+1. logout
+   Untuk keluar dari akun yang digunakan
+2. summonjin
+   Untuk memanggil jin
+3. hapusjin
+   Untuk menghilangkan jin
+4. ubahjin
+   Untuk mengubah tipe jin
+5. batchkumpul
+   Untuk mengerahkan jin untuk mengumpulkan bahan bangunan
+6. batchbangun
+   Untuk mengerahkan jin untuk membangun candi
+7. laporanjin
+   Untuk mengetahui kinerja seluruh jin
+8. laporancandi
+   Untuk mengetahui progress pembangunan candi
+9. save
+   Untuk menyimpan data permainan
+10. exit
+   Untuk keluar dari program
+        """)
+    elif(role == 'roro_jonggrang'):
+        print("""
+=========== HELP ===========
+1. logout
+   Untuk keluar dari akun yang digunakan
+2. hancurkancandi
+   Untuk menghancurkan candi yang tersedia
+3. ayamberkokok
+   Untuk menyelesaikan permainan
+4. save
+   Untuk menyimpan data permainan
+5. exit
+   Untuk keluar dari program        
+        """)
+    elif(role == 'pembangun'):
+        print("""
+=========== HELP ===========
+1. logout
+Untuk keluar dari akun yang digunakan 
+2. bangun
+Untuk membangun candi
+3. save
+Untuk menyimpan data permainan
+4. exit
+Untuk keluar dari program
+        """)
+    elif(role == 'pengumpul'):
+        print("""
+=========== HELP ===========
+1. logout
+Untuk keluar dari akun yang digunakan 
+2. kumpul
+Untuk mengumpulkan resource candi
+3. save
+Untuk menyimpan data permainan
+4. exit
+Untuk keluar dari program 
+        """)
+def F16():
+    savefile = input("Apakah Anda mau melakukan penyimpanan file yang sudah diubah? (y/n) ")
+    while savefile != "y" or savefile != "n" or savefile != "Y" or savefile != "N":
+        savefile = input("Apakah Anda mau melakukan penyimpanan file yang sudah diubah? (y/n) ")
+    if savefile == "y" or savefile == "Y":
+        print("save")
+    else:
+        print()
+        print("File yang sudah diubah tidak tersimpan.")
+
+        
 while True:
     pilihan = input(">>> ")
     if (pilihan == 'login'):
         F01()
     elif (pilihan == 'logout'):
         F02()
+    elif (pilihan == 'summonjin'):
+        F03()
     elif (pilihan == 'ubahjin'):
         F05()
+    elif(pilihan == 'ayamberkokok'):
+        F12()
+    elif(pilihan == 'help'):
+        F15()
     elif (pilihan == 'exit'):
         break
