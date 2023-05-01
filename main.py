@@ -6,14 +6,21 @@ def update(namaFile: str, matriks: list[list[str]]):
     with open(namaFile, 'w', encoding='utf-8') as file:
         if (namaFile == "user.csv"):
             file.write("username;password;role\n")
-            for i in range(len(matriks)):
+            for i in range(len_arr(matriks)):
                 for j in range(3):
-                    if(j == 2 and i != len(matriks)-1):
-                        file.write(matriks[i][j])
-                        file.write("\n")
+                    if(i != len_arr(matriks) -1):
+                        if(j == 2):
+                            file.write(matriks[i][j])
+                            file.write("\n")
+                        else:
+                            file.write(matriks[i][j])
+                            file.write(";")
                     else:
-                        file.write(matriks[i][j])
-                        file.write(";")
+                        if(j == 2):
+                            file.write(matriks[i][j])
+                        else:
+                            file.write(matriks[i][j])
+                            file.write(";")
         else:
             print("")
 
@@ -93,19 +100,73 @@ def F02():
 
 # F03
 def F03():
-    print("""
+    global database
+    global role
+    if (role == 'bandung_bondowoso'):
+        if (len_arr(database) < 100):
+            print("""
 Jenis jin yang dapat dipanggil:
  (1) Pengumpul - Bertugas mengumpulkan bahan bangunan
  (2) Pembangun - Bertugas membangun candi
-    """)
-    jenis_jin = int(input("Masukkan nomor jenis jin yang ingin dipanggil: "))
-    while(jenis_jin != 1 and jenis_jin != 2):
-        print(f'Tidak ada jenis jin bernomor "{jenis_jin}"')
-        jenis_jin = int(input("Masukkan nomor jenis jin yang ingin dipanggil: "))
-    if (jenis_jin == 1):
-        print('Memilih jin "Pengumpul".')
-    elif (jenis_jin == 2):
-        print('Memilih jin "Pembangun".')
+            """)
+            jenis_jin = int(input("Masukkan nomor jenis jin yang ingin dipanggil: "))
+            while(jenis_jin != 1 and jenis_jin != 2):
+                print(f'Tidak ada jenis jin bernomor "{jenis_jin}"')
+                jenis_jin = int(input("Masukkan nomor jenis jin yang ingin dipanggil: "))
+            if (jenis_jin == 1):
+                print('Memilih jin "Pengumpul".')
+            elif (jenis_jin == 2):
+                print('Memilih jin "Pembangun".')
+            nama_jin = input("Masukkan username jin: ")
+            nama_found = False
+            pass_found = False
+            for i in range(len_arr(database)):
+                if (database[i][0] == nama_jin):
+                    nama_found = True
+
+            while (nama_found):
+                nama_found = False
+                print("username jin sudah diambil")
+                nama_jin = input("Masukkan username jin: ")
+                for i in range(len_arr(database)):
+                    if(database[i][0] == nama_jin):
+                        nama_found = True
+
+            pass_jin = input("Masukkan password jin: ")
+            if(len(pass_jin) < 5 or len(pass_jin) >25):
+                pass_found = True
+
+            while (pass_found):
+                pass_found = False
+                print("Password panjangnya harus 5-25 karakter!")
+                pass_jin = input("Masukkan password jin: ")
+                if(len(pass_jin) < 5 or len(pass_jin) >25):
+                    pass_found = True
+            
+            print("""
+        Mengumpulkan sesajen...
+        Menyerahkan sesajen...
+        Membacakan mantra...
+            """)
+            print(f'Jin {nama_jin} berhasil dipanggil!')
+            jinbaru = ['','','']
+            for i in range (3):
+                if (i == 0):
+                    jinbaru[i] = nama_jin
+                elif (i == 1):
+                    jinbaru[i] = pass_jin
+                else:
+                    if(jenis_jin == 1):
+                        jinbaru[i] = "pengumpul"
+                    else:
+                        jinbaru[i] = "pembangun"
+            database = konso(database,jinbaru)
+            update("user.csv",database)
+        else:
+            print("penuh")
+    else:
+        print("anda bukan bondowoso. Akses ditolak")    
+
 
         
 # F05
